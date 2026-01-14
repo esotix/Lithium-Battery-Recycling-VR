@@ -3,37 +3,36 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
-    public GameObject batteryPrefab;
-    public int poolSize = 10;
 
-    private Queue<GameObject> pool = new Queue<GameObject>();
+    public List<GameObject> batteryPrefabs;
+    public int poolSize = 3;
+
+    private List<GameObject> pool = new List<GameObject>();
 
     void Awake()
     {
-        for (int i = 0; i < poolSize; i++)
+        for (int i = 0; i < batteryPrefabs.Count; i++)
         {
-            GameObject obj = Instantiate(batteryPrefab, transform);
+            GameObject obj = Instantiate(batteryPrefabs[i], transform);
             obj.SetActive(false);
-            pool.Enqueue(obj);
+            pool.Add(obj);
+
         }
     }
 
     public GameObject GetFromPool(Vector3 position)
     {
-        GameObject obj = pool.Count > 0 ? pool.Dequeue() : Instantiate(batteryPrefab);
+        GameObject obj = pool[Random.Range(0, batteryPrefabs.Count)];
 
         obj.transform.position = position;
         obj.SetActive(true);
 
-        BatteryMover mover = obj.GetComponent<BatteryMover>();
-        mover.Init(this);
-
         return obj;
     }
+
 
     public void ReturnToPool(GameObject obj)
     {
         obj.SetActive(false);
-        pool.Enqueue(obj);
     }
 }
