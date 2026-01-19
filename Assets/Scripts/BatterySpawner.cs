@@ -18,4 +18,9 @@ public class BatterySpawner : MonoBehaviour
             pool.GetFromPool(spawnPoint.position);
         }
     }
+    
+    public void Spawning()
+    {
+        pool.GetFromPool(spawnPoint.position);
+    }
 }
