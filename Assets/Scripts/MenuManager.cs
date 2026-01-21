@@ -16,7 +16,7 @@ public class MenuManager : MonoBehaviour
     }
     public void TrainingMode()
     {
-        SceneManager.LoadScene("training");
+        SceneManager.LoadScene("Training");
     }
 }
 
