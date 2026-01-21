@@ -6,6 +6,8 @@ public class ConveyerBelt : MonoBehaviour
     public float materialSpeed = 5f;
     public float batterySpeed = 2f;
 
+    public bool batteryOnBelt = false;
+
     private float firstMoveDuration = 3;
     private GameObject battery;
     private Material conveyerBelt;
@@ -14,19 +16,17 @@ public class ConveyerBelt : MonoBehaviour
     {
         conveyerBelt = GetComponent<Renderer>().material;
     }
-
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Enter");
         if (collision.gameObject.CompareTag("Battery"))
         {
             battery = collision.gameObject;
+            batteryOnBelt = true;
             StartCoroutine(FirstMovingBelt());
         }
     }
     private void OnCollisionExit(Collision collision)
     {
-        Debug.Log("Exit");
         if (collision.gameObject.CompareTag("Battery"))
         {
             battery = null;

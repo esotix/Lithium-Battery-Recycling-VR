@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: uploads_files_2578427_CarBattery
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1235e33ca2d21214c9960fe10dfb9105, type: 3}
+      propertyPath: m_TagString
+      value: Battery
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 65702495048144492, guid: 1235e33ca2d21214c9960fe10dfb9105, type: 3}
