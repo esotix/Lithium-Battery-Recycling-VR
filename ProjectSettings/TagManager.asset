@@ -5,7 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - Anchor
-  - Battery
+  - BatteryNikon
+  - BatteryVolt
+  - BatteryCar
   layers:
   - Default
   - TransparentFX
