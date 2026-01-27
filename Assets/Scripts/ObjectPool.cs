@@ -1,5 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ObjectPool : MonoBehaviour
 {
@@ -16,13 +18,12 @@ public class ObjectPool : MonoBehaviour
             GameObject obj = Instantiate(batteryPrefabs[i], transform);
             obj.SetActive(false);
             pool.Add(obj);
-
         }
     }
-
     public GameObject GetFromPool(Vector3 position)
     {
-        GameObject obj = pool[Random.Range(0, batteryPrefabs.Count)];
+        int randomIndex = Random.Range(0, pool.Count);
+        GameObject obj = pool[randomIndex];
 
         obj.transform.position = position;
         obj.SetActive(true);
@@ -34,5 +35,6 @@ public class ObjectPool : MonoBehaviour
     public void ReturnToPool(GameObject obj)
     {
         obj.SetActive(false);
+        obj.transform.SetParent(transform);
     }
 }

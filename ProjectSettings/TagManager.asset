@@ -8,6 +8,14 @@ TagManager:
   - BatteryNikon
   - BatteryVolt
   - BatteryCar
+  - Battery
+  - BatteryType
+  - BatteryState
+  - Caracteristics
+  - BatteryInfoPanel
+  - Reusable
+  - Recyclable
+  - Broken
   layers:
   - Default
   - TransparentFX
@@ -15,7 +23,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Battery
   - 
   - 
   - 

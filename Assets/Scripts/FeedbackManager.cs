@@ -11,7 +11,7 @@ public class FeedbackManager : MonoBehaviour
     [SerializeField] public FeedbackUI feedbackUI;
 
 
-    string[] feedbacksNikon = new string[]
+    string[] feedbacksReusable = new string[]
     {
     "Placement incorrect : ce type de batterie peut provoquer un court-circuit dans ce conteneur.",
     "Erreur de tri : risque d’échauffement lié à une incompatibilité de stockage.",
@@ -31,7 +31,7 @@ public class FeedbackManager : MonoBehaviour
     };
 
 
-    string[] feedbacksVolt = new string[]
+    string[] feedbacksBroken = new string[]
     {
     "Erreur critique : ce type de batterie présente un risque d’incendie dans ce circuit.",
     "Tri incorrect : non-respect des normes de sécurité industrielle.",
@@ -56,7 +56,7 @@ public class FeedbackManager : MonoBehaviour
     };
 
 
-    string[] feedbacksCar = new string[]
+    string[] feedbacksRecyclable = new string[]
     {
     "Erreur majeure : ce type de batterie peut provoquer une réaction thermique dangereuse.",
     "Placement interdit : risque élevé d’explosion dans ce circuit de traitement.",
@@ -85,33 +85,46 @@ public class FeedbackManager : MonoBehaviour
     "Erreur fatale : protocole de mise en sécurité absent."
     };
 
-
-
-
+    string[] feedbacksGood = new string[]
+    {
+        "Bon tri : cette batterie est correctement orientée pour un recyclage optimal.",
+        "Placement adéquat : ce type de batterie est bien positionné pour le traitement.",
+        "Tri conforme : cette batterie respecte les normes de sécurité et environnementales.",
+        "Bonne procédure : ce type de batterie est dirigé vers la filière appropriée.",
+        "Stockage correct : cette batterie est placée de manière sûre pour le recyclage.",
+        "Orientation optimale : ce type de batterie maximise la récupération des matériaux.",
+        "Tri efficace : cette batterie est bien triée pour un traitement respectueux de l’environnement.",
+        "Placement sécurisé : ce type de batterie minimise les risques lors du traitement.",
+        "Bonne gestion : cette batterie est correctement intégrée dans le circuit de recyclage.",
+        "Tri responsable : ce type de batterie contribue à une économie circulaire durable."
+    };
 
     public void displayFeedBack(int numeroList)
     {
         if (numeroList == 1)
         {
-            randomDisplay = UnityEngine.Random.Range(0, feedbacksNikon.Length);
+            randomDisplay = UnityEngine.Random.Range(0, feedbacksReusable.Length);
             
-            FeedbackDisplayed = feedbacksNikon[randomDisplay];
+            FeedbackDisplayed = feedbacksReusable[randomDisplay];
         }
         else if (numeroList == 2)
         {
-            randomDisplay = UnityEngine.Random.Range(0, feedbacksVolt.Length);
+            randomDisplay = UnityEngine.Random.Range(0, feedbacksBroken.Length);
 
-            FeedbackDisplayed = feedbacksVolt[randomDisplay];
+            FeedbackDisplayed = feedbacksBroken[randomDisplay];
         }
         else if(numeroList == 3) 
         {
-            randomDisplay = UnityEngine.Random.Range(0, feedbacksCar.Length);
+            randomDisplay = UnityEngine.Random.Range(0, feedbacksRecyclable.Length);
 
-            FeedbackDisplayed = feedbacksCar[randomDisplay];
+            FeedbackDisplayed = feedbacksRecyclable[randomDisplay];
+        }
+        else if (numeroList == 4)
+        {
+            randomDisplay = UnityEngine.Random.Range(0, feedbacksGood.Length);
+
+            FeedbackDisplayed = feedbacksGood[randomDisplay];
         }
         feedbackUI.ShowFeedback(FeedbackDisplayed);
-
     }
-
-
 }
