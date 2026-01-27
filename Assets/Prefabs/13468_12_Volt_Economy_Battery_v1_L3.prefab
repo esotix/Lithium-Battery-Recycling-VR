@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3d214a967c4297e42ba285e298bcbb7a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3d214a967c4297e42ba285e298bcbb7a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -69,8 +69,16 @@ PrefabInstance:
       value: 13468_12_Volt_Economy_Battery_v1_L3
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3d214a967c4297e42ba285e298bcbb7a, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3d214a967c4297e42ba285e298bcbb7a, type: 3}
       propertyPath: m_TagString
-      value: Battery
+      value: BatteryVolt
+      objectReference: {fileID: 0}
+    - target: {fileID: 7911859048680358102, guid: 3d214a967c4297e42ba285e298bcbb7a, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

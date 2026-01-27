@@ -85,10 +85,6 @@ public class FeedbackManager : MonoBehaviour
     "Erreur fatale : protocole de mise en sécurité absent."
     };
 
-
-
-
-
     public void displayFeedBack(int numeroList)
     {
         if (numeroList == 1)
@@ -110,8 +106,5 @@ public class FeedbackManager : MonoBehaviour
             FeedbackDisplayed = feedbacksCar[randomDisplay];
         }
         feedbackUI.ShowFeedback(FeedbackDisplayed);
-
     }
-
-
 }

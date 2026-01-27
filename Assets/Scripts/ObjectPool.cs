@@ -1,5 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ObjectPool : MonoBehaviour
 {
@@ -16,7 +18,6 @@ public class ObjectPool : MonoBehaviour
             GameObject obj = Instantiate(batteryPrefabs[i], transform);
             obj.SetActive(false);
             pool.Add(obj);
-
         }
     }
 

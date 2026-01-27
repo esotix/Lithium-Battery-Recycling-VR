@@ -1,15 +1,17 @@
 using System.Collections;
 using UnityEngine;
 
-public class ConveyerBelt : MonoBehaviour
+public class FirstConveyer : MonoBehaviour
 {
     public float materialSpeed = 1f;
     public float batterySpeed = 2f;
 
     public bool batteryOnBelt = false;
 
+    private float firstMoveDuration = 2;
     private GameObject battery;
     private Material conveyerBelt;
+    private bool beltIsActive = true;
 
     private void Start()
     {
@@ -22,7 +24,9 @@ public class ConveyerBelt : MonoBehaviour
         {
             battery = collision.gameObject;
             batteryOnBelt = true;
-            StartCoroutine(MovingBelt());
+            if (!beltIsActive) return;
+            StartCoroutine(FirstMovingBelt());
+            beltIsActive = false;
         }
     }
     private void OnCollisionExit(Collision collision)
@@ -34,6 +38,27 @@ public class ConveyerBelt : MonoBehaviour
             batteryOnBelt = false;
         }
     }
+
+    public void MoveBelt()
+    {
+        if (batteryOnBelt)
+        {
+            StartCoroutine(MovingBelt());
+            beltIsActive = true;
+        }
+    }
+
+    IEnumerator FirstMovingBelt()
+    {
+        float elapsedTime = 0f;
+        while (elapsedTime < firstMoveDuration)
+        {
+            conveyerBelt.mainTextureOffset += new Vector2(0, materialSpeed * Time.deltaTime);
+            battery.transform.Translate(Vector3.left * batterySpeed * Time.deltaTime, Space.World);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+    }
     IEnumerator MovingBelt()
     {
         while (battery)
@@ -43,4 +68,5 @@ public class ConveyerBelt : MonoBehaviour
             yield return null;
         }
     }
+
 }

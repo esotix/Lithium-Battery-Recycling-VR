@@ -13,6 +13,7 @@ public class GateScore : MonoBehaviour
     public bool triggered = false;
     public ScoreManager AddingScore;
     public FeedbackManager FeedbackAppel;
+    public ObjectPool objectPool;
     int feedBackNumber;
     private void OnTriggerEnter(Collider other)
     {
@@ -21,7 +22,6 @@ public class GateScore : MonoBehaviour
         {
             AddingScore.Scored();
             StartCoroutine(ChangeMaterial(mat_True));
-            
         }
         else
         {
@@ -34,6 +34,12 @@ public class GateScore : MonoBehaviour
             FeedbackAppel.displayFeedBack(feedBackNumber);
             StartCoroutine(ChangeMaterial(mat_False));
         }
+        if (other.CompareTag("BatteryNikon") || other.CompareTag("BatteryVolt") || other.CompareTag("BatteryCar"))
+        {
+            other.gameObject.transform.Translate(Vector3.up * 100, Space.World);
+            objectPool.ReturnToPool(other.gameObject);
+        }
+
     }
 
     IEnumerator ChangeMaterial(Material mat)
