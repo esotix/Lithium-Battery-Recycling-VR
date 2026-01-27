@@ -20,10 +20,10 @@ public class ObjectPool : MonoBehaviour
             pool.Add(obj);
         }
     }
-
     public GameObject GetFromPool(Vector3 position)
     {
-        GameObject obj = pool[Random.Range(0, batteryPrefabs.Count)];
+        int randomIndex = Random.Range(0, pool.Count);
+        GameObject obj = pool[randomIndex];
 
         obj.transform.position = position;
         obj.SetActive(true);
@@ -35,5 +35,6 @@ public class ObjectPool : MonoBehaviour
     public void ReturnToPool(GameObject obj)
     {
         obj.SetActive(false);
+        obj.transform.SetParent(transform);
     }
 }

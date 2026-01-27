@@ -7,6 +7,7 @@ public class FeedbackUI : MonoBehaviour
     public GameObject feedbackPrefab;
     public TextMeshProUGUI textFeedback;
     public TextMeshProUGUI score;
+    public bool PlayMODE = false;
 
     private ScoreManager scoreManager;
 
@@ -18,6 +19,7 @@ public class FeedbackUI : MonoBehaviour
 
     public void ShowFeedback(string message)
     {
+        if (PlayMODE) return;
         feedbackPrefab.SetActive(true);
         textFeedback.text = message;
         score.text = "score : " + scoreManager.GeneralScore;

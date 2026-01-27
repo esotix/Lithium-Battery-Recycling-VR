@@ -21,25 +21,37 @@ public class GateScore : MonoBehaviour
         if (other.CompareTag(Tag))
         {
             AddingScore.Scored();
+            FeedbackAppel.displayFeedBack(4);
             StartCoroutine(ChangeMaterial(mat_True));
         }
-        else
+        else if (other.CompareTag("Broken") || other.CompareTag("Recyclable") || other.CompareTag("Reusable"))
         {
-            if (Tag == "BatteryNikon")
+            if (Tag == "Reusable")
             {
                 feedBackNumber = 1;
+                AddingScore.Scored(-1);
             }
-            else if(Tag == "BatteryVolt") feedBackNumber = 2;
-            else if(Tag == "BatteryCar") feedBackNumber=3;
+            else if (Tag == "Broken")
+            {
+                feedBackNumber = 2;
+                AddingScore.Scored(-2);
+            }
+            else if (Tag == "Recyclable") 
+            { 
+                feedBackNumber = 3;
+                AddingScore.Scored(-1);
+            }
             FeedbackAppel.displayFeedBack(feedBackNumber);
             StartCoroutine(ChangeMaterial(mat_False));
         }
-        if (other.CompareTag("BatteryNikon") || other.CompareTag("BatteryVolt") || other.CompareTag("BatteryCar"))
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Broken") || other.CompareTag("Recyclable") || other.CompareTag("Reusable"))
         {
-            other.gameObject.transform.Translate(Vector3.up * 100, Space.World);
             objectPool.ReturnToPool(other.gameObject);
         }
-
     }
 
     IEnumerator ChangeMaterial(Material mat)

@@ -20,7 +20,7 @@ public class FirstConveyer : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         string tag = collision.gameObject.tag;
-        if (tag == "BatteryNikon" || tag == "BatteryCar" || tag == "BatteryVolt")
+        if (tag == "Reusable" || tag == "Recyclable" || tag == "Broken")
         {
             battery = collision.gameObject;
             batteryOnBelt = true;
@@ -32,10 +32,11 @@ public class FirstConveyer : MonoBehaviour
     private void OnCollisionExit(Collision collision)
     {
         string tag = collision.gameObject.tag;
-        if (tag == "BatteryNikon" || tag == "BatteryCar" || tag == "BatteryVolt")
+        if (tag == "Reusable" || tag == "Recyclable" || tag == "Broken")
         {
             battery = null;
             batteryOnBelt = false;
+            StopAllCoroutines();
         }
     }
 
@@ -66,6 +67,7 @@ public class FirstConveyer : MonoBehaviour
             conveyerBelt.mainTextureOffset += new Vector2(0, materialSpeed * Time.deltaTime);
             battery.transform.Translate(Vector3.left * batterySpeed * Time.deltaTime, Space.World);
             yield return null;
+            beltIsActive = true;
         }
     }
 

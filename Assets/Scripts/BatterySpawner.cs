@@ -14,7 +14,6 @@ public class BatterySpawner : MonoBehaviour
     private bool activated = true;
     private bool knobDown = false;
 
-
     private void Start()
     {
         canSpawn = !conveyerBelt.batteryOnBelt;

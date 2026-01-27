@@ -64,7 +64,7 @@ public class ManageConvoyer : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         string tag = collision.gameObject.tag;
-        if (tag == "BatteryNikon" || tag == "BatteryCar" || tag ==  "BatteryVolt")
+        if (tag == "Reusable" || tag == "Recyclable" || tag == "Broken")
         {
             battery = collision.gameObject;
             batteryOnBelt = true;
@@ -74,8 +74,9 @@ public class ManageConvoyer : MonoBehaviour
     private void OnCollisionExit(Collision collision)
     {
         string tag = collision.gameObject.tag;
-        if (tag == "BatteryNikon" || tag == "BatteryCar" || tag == "BatteryVolt")
+        if (tag == "Reusable" || tag == "Recyclable" || tag == "Broken")
         {
+            StopAllCoroutines();
             battery = null;
             batteryOnBelt = false;
         }
