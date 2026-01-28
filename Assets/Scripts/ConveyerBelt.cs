@@ -3,12 +3,11 @@ using UnityEngine;
 
 public class ConveyerBelt : MonoBehaviour
 {
-    public float materialSpeed = 5f;
+    public float materialSpeed = 1f;
     public float batterySpeed = 2f;
 
     public bool batteryOnBelt = false;
 
-    private float firstMoveDuration = 3;
     private GameObject battery;
     private Material conveyerBelt;
 
@@ -18,30 +17,23 @@ public class ConveyerBelt : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Battery"))
+        string tag = collision.gameObject.tag;
+        if (tag == "Reusable" || tag == "Recyclable" || tag == "Broken")
         {
             battery = collision.gameObject;
             batteryOnBelt = true;
-            StartCoroutine(FirstMovingBelt());
+            StartCoroutine(MovingBelt());
         }
     }
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Battery"))
+        string tag = collision.gameObject.tag;
+        if (tag == "Reusable" || tag == "Recyclable" || tag == "Broken")
         {
             battery = null;
-        }
-    }
+            batteryOnBelt = false;
+            StopAllCoroutines();
 
-    IEnumerator FirstMovingBelt()
-    {
-        float elapsedTime = 0f;
-        while (elapsedTime < firstMoveDuration)
-        {
-            conveyerBelt.mainTextureOffset += new Vector2(0, materialSpeed * Time.deltaTime);
-            battery.transform.Translate(Vector3.left * batterySpeed * Time.deltaTime);
-            elapsedTime += Time.deltaTime;
-            yield return null;
         }
     }
     IEnumerator MovingBelt()
@@ -49,7 +41,7 @@ public class ConveyerBelt : MonoBehaviour
         while (battery)
         {
             conveyerBelt.mainTextureOffset += new Vector2(0, materialSpeed * Time.deltaTime);
-            battery.transform.Translate(Vector3.left * batterySpeed * Time.deltaTime);
+            battery.transform.Translate(Vector3.left * batterySpeed * Time.deltaTime, Space.World);
             yield return null;
         }
     }

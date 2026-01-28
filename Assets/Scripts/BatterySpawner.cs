@@ -8,12 +8,11 @@ public class BatterySpawner : MonoBehaviour
     public Transform spawnPoint;
     public XRKnob knob;
     public float spawnInterval = 1.5f;
-    public ConveyerBelt conveyerBelt;
+    public FirstConveyer conveyerBelt;
 
     private bool canSpawn;
     private bool activated = true;
     private bool knobDown = false;
-
 
     private void Start()
     {
@@ -61,13 +60,14 @@ public class BatterySpawner : MonoBehaviour
     {
         yield return new WaitForSeconds(spawnInterval);
         knob.value = 0f;
-        
+        Activate(activated);
+
     }
     private IEnumerator IsKnobDown()
     {
         while (true)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
             if (knobDown)
             {
                 SpawnBattery();
