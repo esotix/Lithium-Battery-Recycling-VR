@@ -7,6 +7,7 @@ public class ScoreManager : MonoBehaviour
 
     public void Scored(int score = 1){
         GeneralScore += score;
+        if (GeneralScore < 0) GeneralScore = 0;
         if (GameManager.Instance != null)
         {
             GameManager.Instance.DisplayScore(GeneralScore);

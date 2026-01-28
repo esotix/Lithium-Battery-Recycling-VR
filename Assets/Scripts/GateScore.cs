@@ -35,6 +35,7 @@ public class GateScore : MonoBehaviour
             {
                 feedBackNumber = 2;
                 AddingScore.Scored(-2);
+                
             }
             else if (Tag == "Recyclable") 
             { 
@@ -43,6 +44,10 @@ public class GateScore : MonoBehaviour
             }
             FeedbackAppel.displayFeedBack(feedBackNumber);
             StartCoroutine(ChangeMaterial(mat_False));
+            if (GameManager.Instance != null && other.CompareTag("Broken"))
+            {
+                GameManager.Instance.LaunchExplosion(other.transform.position);
+            }
         }
     }
 

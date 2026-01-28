@@ -18,5 +18,9 @@ public class MenuManager : MonoBehaviour
     {
         SceneManager.LoadScene("Training");
     }
+    public void BackToMainMenu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
 }
 
