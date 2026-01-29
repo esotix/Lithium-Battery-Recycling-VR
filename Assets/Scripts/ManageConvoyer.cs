@@ -12,9 +12,6 @@ public class ManageConvoyer : MonoBehaviour
     public float batterySpeed = 2f;
     public bool batteryOnBelt = false;
     public float MoveDuration = 3f;
-    public bool testingNikon = false;
-    public bool testingVolt = false;
-    public bool testingCar = false;
 
     private GameObject battery;
     private Material conveyerBelt;
@@ -26,30 +23,11 @@ public class ManageConvoyer : MonoBehaviour
         conveyerBelt = GetComponent<Renderer>().material;
         MovingDuration = MoveDuration;
     }
-
-    private void Update()
-    {
-        if (testingNikon)
-        {
-            GateNikon();
-            testingNikon = false;
-        }
-        if (testingCar)
-        {
-            GateCar();
-            testingCar = false;
-        }
-        if (testingVolt)
-        {
-            GateVolt();
-            testingVolt = false;
-        }
-    }
     public void GateCar()
     {
-        direction = Vector3.back;
+        direction = Vector3.left;
         MovingVector = new Vector2(0, materialSpeed);
-        MovingDuration = 2.8f;
+        MovingDuration = MoveDuration;
     }
     public void GateVolt()
     {
@@ -57,9 +35,9 @@ public class ManageConvoyer : MonoBehaviour
     }
     public void GateNikon()
     {
-        direction = Vector3.forward;
+        direction = Vector3.right;
         MovingVector = - new Vector2(0, materialSpeed);
-        MovingDuration = 2.7f;
+        MovingDuration = MoveDuration;
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -85,7 +63,7 @@ public class ManageConvoyer : MonoBehaviour
     IEnumerator MovingBelt()
     {
         float elapsedTime = 0f;
-        battery.transform.Translate(Vector3.left * batterySpeed * Time.deltaTime, Space.World);
+        battery.transform.Translate(Vector3.forward * batterySpeed * Time.deltaTime, Space.World);
         while (elapsedTime < MovingDuration)
         {
             conveyerBelt.mainTextureOffset += MovingVector * Time.deltaTime;
@@ -93,15 +71,14 @@ public class ManageConvoyer : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        StartCoroutine(MovingBeltLeft());
+        StartCoroutine(MovingBeltForward());
     }
 
-    IEnumerator MovingBeltLeft()
+    IEnumerator MovingBeltForward()
     {
         while (battery)
         {
-            conveyerBelt.mainTextureOffset += new Vector2(materialSpeed * Time.deltaTime, 0) ;
-            battery.transform.Translate(Vector3.left * batterySpeed * Time.deltaTime, Space.World);
+            battery.transform.Translate(Vector3.forward * batterySpeed * Time.deltaTime, Space.World);
             yield return null;
         }
     }
