@@ -38,10 +38,13 @@ public class ConveyerBelt : MonoBehaviour
     }
     IEnumerator MovingBelt()
     {
+        battery.transform.Translate(Vector3.left * batterySpeed * Time.deltaTime, Space.World);
+        battery.transform.Translate(Vector3.left * batterySpeed * Time.deltaTime, Space.World);
+
         while (battery)
         {
             conveyerBelt.mainTextureOffset += new Vector2(0, materialSpeed * Time.deltaTime);
-            battery.transform.Translate(Vector3.left * batterySpeed * Time.deltaTime, Space.World);
+            battery.transform.Translate(Vector3.forward * batterySpeed * Time.deltaTime, Space.World);
             yield return null;
         }
     }

@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class GateScore : MonoBehaviour
@@ -29,24 +30,28 @@ public class GateScore : MonoBehaviour
             if (Tag == "Reusable")
             {
                 feedBackNumber = 1;
-                AddingScore.Scored(-1);
             }
             else if (Tag == "Broken")
             {
                 feedBackNumber = 2;
-                AddingScore.Scored(-2);
-                
             }
-            else if (Tag == "Recyclable") 
-            { 
+            else if (Tag == "Recyclable")
+            {
                 feedBackNumber = 3;
-                AddingScore.Scored(-1);
             }
             FeedbackAppel.displayFeedBack(feedBackNumber);
             StartCoroutine(ChangeMaterial(mat_False));
-            if (GameManager.Instance != null && other.CompareTag("Broken"))
+            if (GameManager.Instance != null)
             {
-                GameManager.Instance.LaunchExplosion(other.transform.position);
+                if (other.CompareTag("Broken"))
+                {
+                    GameManager.Instance.LaunchExplosion(other.transform.position);
+                    AddingScore.Scored(-2);
+                }
+                else if (other.CompareTag("Recyclable") || other.CompareTag("Reusable"))
+                {
+                    AddingScore.Scored(-1);
+                }
             }
         }
     }
